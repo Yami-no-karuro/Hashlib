@@ -1,7 +1,7 @@
 import ctypes
 import os
 
-libpath: str = os.path.abspath("hashlib/build/hashlib.so")
+libpath: str = os.path.abspath("libhash/build/libhash.so")
 lib = ctypes.CDLL(libpath)
 
 lib.fnv1a.argtypes = [ctypes.c_char_p, ctypes.c_size_t]

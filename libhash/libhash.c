@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <string.h>
 
-#include "hashlib.h"
+#include "libhash.h"
 
 unsigned long fnv1a(const char *data, size_t len) {
     unsigned long hash = FNV_OFFSET_BASIS;

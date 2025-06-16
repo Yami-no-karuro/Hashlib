@@ -1,1 +1,4 @@
 __pycache__
+
+hashlib/build/*
+hashlib/build/.gitkeep

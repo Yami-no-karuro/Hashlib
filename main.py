@@ -1,4 +1,4 @@
-from hashlib import fnv1a
+from libhash.bindings import fnv1a
 
 filepath_a: str = "./source/file_a.txt"
 with open(filepath_a, "rb") as f:
