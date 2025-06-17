@@ -6,9 +6,11 @@
 #define FNV_FILE_CHUNK_SIZE 4096
 
 #define DJB2_BASIS 5381
+#define DJB2_FILE_CHUNK_SIZE 4096 
 
 unsigned long fnv1a(const char *data, size_t len);
 unsigned long fnv1a_file(const char *filename);
 unsigned long djb2(const char *str);
+unsigned long djb2_file(const char *filename);
 
 #endif

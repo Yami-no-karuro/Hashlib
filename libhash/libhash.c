@@ -4,7 +4,7 @@
 
 #include "libhash.h"
 
-unsigned long fnv1a(const char *data, size_t len) 
+unsigned long fnv1a(const char *data, size_t len)
 {
     unsigned long hash = FNV_OFFSET_BASIS;
     for (size_t i = 0; i < len; i++) {
@@ -15,7 +15,8 @@ unsigned long fnv1a(const char *data, size_t len)
     return hash;
 }
 
-unsigned long fnv1a_file(const char *filename) {
+unsigned long fnv1a_file(const char *filename)
+{
     FILE *f = fopen(filename, "rb");
     if (!f) {
         perror("fopen");
@@ -37,7 +38,7 @@ unsigned long fnv1a_file(const char *filename) {
     return hash;
 }
 
-unsigned long djb2(const char *str) 
+unsigned long djb2(const char *str)
 {
     unsigned long hash = DJB2_BASIS;
     int c;
@@ -45,5 +46,25 @@ unsigned long djb2(const char *str)
     while ((c = (unsigned char)*str++))
         hash = ((hash << 5) + hash) + c; 
 
+    return hash;
+}
+
+unsigned long djb2_file(const char *filename)
+{
+    FILE *f = fopen(filename, "rb");
+    if (!f) {
+        perror("fopen");
+        return 0;
+    }
+    
+    unsigned long hash = DJB2_BASIS;
+    unsigned char buffer[DJB2_FILE_CHUNK_SIZE];
+    size_t read_bytes;
+
+    while ((read_bytes = fread(buffer, 1, DJB2_FILE_CHUNK_SIZE, f)) > 0)
+        for (size_t i = 0; i < read_bytes; i++)
+            hash = ((hash << 5) + hash) + buffer[i];
+
+    fclose(f);
     return hash;
 }
