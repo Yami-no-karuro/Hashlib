@@ -1,21 +1,19 @@
 from libhash.bindings import fnv1a
+from libhash.bindings import fnv1a_file
 from libhash.bindings import djb2
 
-filepath_a: str = "./source/file_a.txt"
-with open(filepath_a, "rb") as f:
-    content_a = f.read()
+input: str = b"Hello, my name is Yami-no-karuro and i'm a software developer."
+file_a: str = "source/file_a.txt"
+file_b: str = "source/file_b.txt"
 
-filepath_b: str = "./source/file_b.txt"
-with open(filepath_b, "rb") as f:
-    content_b = f.read()
+fnv1a_digest: int = fnv1a(input)
+print(f"FNV-1a digest: {fnv1a_digest:#018x}")
 
-fnv1a_a = fnv1a(content_a)
-fnv1a_b = fnv1a(content_b)
+djb2_digest: int = djb2(input)
+print(f"DJB2 digest: {djb2_digest:#018x}")
 
-djb2_a = djb2(content_a)
-djb2_b = djb2(content_b)
-
-print(f"FNV1a digest ({filepath_a}): {fnv1a_a:#018x}")
-print(f"DJB2 digest ({filepath_a}): {fnv1a_b:#018x}")
-print(f"FNV1a digest ({filepath_b}): {djb2_a:#018x}")
-print(f"DJB2 digest ({filepath_b}): {djb2_b:#018x}")
+file_a_digest: int = fnv1a_file(file_a)
+file_b_digest: int = fnv1a_file(file_b)
+if (file_a_digest == file_b_digest):
+    print(f"No difference found between \"{file_a}\" and \"{file_b}\".")
+    print("The files are equals.")
