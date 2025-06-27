@@ -2,7 +2,7 @@ from libhash.bindings import fnv1a
 from libhash.bindings import fnv1a_file
 from libhash.bindings import djb2
 
-input: str = b"Hello, my name is Yami-no-karuro and i'm a software developer."
+input: bytes = b"Hello, my name is Yami-no-karuro and i'm a software developer."
 file_a: str = "source/file_a.txt"
 file_b: str = "source/file_b.txt"
 
